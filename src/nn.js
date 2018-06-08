@@ -58,6 +58,8 @@ class NeuralNetwork {
     }
 
     train (input_arr, target_arr) {
+        print(this.weights[0]);
+        this.weights[0].data[0][0] += 1
         if(target_arr.length < this.layers[this.layers.length-1].nodes.row){
             console.error("[NeuralNetwork.train]: target_arr length("+ target_arr.length +") and output layer row("+ this.layers[this.layers.length-1].nodes.row +") not matched");
             return undefined
@@ -86,15 +88,15 @@ class NeuralNetwork {
 
         // Adjust all the weights and bias
         for (let i = this.layers.length-1; i > 0; i--) {
-            const b = this.layers[i].nodes;
             const b_error = errors[i-1];
+            const b = this.layers[i].nodes;
             const b_gradient = Matrix.map(b, dsigmoid);
             b_gradient.multiply_element(b_error);
-            b_gradient.multiply(this.learning_rate);
+            b_gradient.multiply_element(this.learning_rate);
+            this.biases[i-1].add(b_gradient);
             const aT = Matrix.transpose(this.layers[i-1].nodes);
             const w_ab_delta = Matrix.multiply(b_gradient, aT);
             this.weights[i-1].add(w_ab_delta);
-            this.biases[i-1].add(b_gradient);
         }
         // errors[1].print();
     }

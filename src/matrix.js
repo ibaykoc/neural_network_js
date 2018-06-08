@@ -100,14 +100,12 @@ class Matrix {
         if(b instanceof Matrix) {
             for (let r = 0; r < this.row; r++) {
                 for (let c = 0; c < this.col; c++) {
-                    // Scalar product
                     this.data[r][c] *= b.data[r][c];
                 }
             }
         } else {
             for (let r = 0; r < this.row; r++) {
                 for (let c = 0; c < this.col; c++) {
-                    // Scalar product
                     this.data[r][c] *= b;
                 }
             }

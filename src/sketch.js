@@ -23,11 +23,15 @@ function setup() {
     new Layer(2),
     new Layer(1)
   ]);
-  for (let i = 0; i < 5; i++) {  
+  // print(nn.weights);
+
+  for (let i = 0; i < 10; i++) {  
     const data = random(training_data);
     nn.train(data.input, data.target);
   }
 
+  // print(nn.weights);
+  
   nn.feed_forward([1,0]).print();
   nn.feed_forward([0,1]).print();
   nn.feed_forward([0,0]).print();
