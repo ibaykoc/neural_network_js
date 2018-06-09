@@ -12,6 +12,16 @@ class Matrix {
         }
     }
 
+    copy() {
+        let m = new Matrix(this.row, this.col);
+        for (let i = 0; i < this.row; i++) {
+          for (let j = 0; j < this.col; j++) {
+            m.data[i][j] = this.data[i][j];
+          }
+        }
+        return m;
+      }
+
     static fromArray(arr){
         let m = new Matrix(arr.length, 1);
         for (let r = 0; r < m.row; r++) {
